@@ -1,0 +1,28 @@
+{
+  "name": "fincontrol-payments-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irlanlimapm/fincontrol-payments-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/irlanlimapm/fincontrol-payments-api/issues"
+  },
+  "homepage": "https://github.com/irlanlimapm/fincontrol-payments-api#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
