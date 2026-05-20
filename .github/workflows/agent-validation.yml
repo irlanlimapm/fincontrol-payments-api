@@ -1,0 +1,29 @@
+name: Agent Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate-repository-governance:
+    name: Validate repository governance artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate required governance files
+        run: |
+          test -f .github/copilot-instructions.md
+          test -f .github/pull_request_template.md
+          test -f .github/CODEOWNERS
+          test -f adrs/001-pr-self-approval-during-solo-dev.md
+          test -f guardrails/autonomy-matrix.md
+          test -f evaluation/pr-review-rubric.md
+
+      - name: Validate application syntax
+        run: |
+          node --check src/app.js
