@@ -1,0 +1,15 @@
+# Default owner for all files in this repository
+* @irlanlimaj
+
+# GitHub governance files require explicit human ownership
+/.github/ @irlanlimaj
+
+# Architecture decisions require explicit human ownership
+/adrs/ @irlanlimaj
+
+# Guardrails and evaluation artifacts require explicit human ownership
+/guardrails/ @irlanlimaj
+/evaluation/ @irlanlimaj
+
+# Agent specifications require explicit human ownership
+/agents/ @irlanlimaj

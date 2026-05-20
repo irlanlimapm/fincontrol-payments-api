@@ -28,8 +28,20 @@ For the solo-developer phase, the ruleset on `main` is configured to:
 - Require 1 approving review.
 - **Not** require that the approver be different from the author.
 
-The author may approve their own PR. Admin bypass is **not** used: every
-merge still produces an approval record in the repo audit log.
+Self-approval is not permitted by the current ruleset. In practice, GitHub
+prevents the pull request author from approving their own PR when review
+requirements are enforced.
+
+During the solo-development phase, the repository admin bypass may be used
+to merge PRs when no second human reviewer is available. This is an explicit
+temporary exception, not the target operating model.
+
+Each bypass must be documented in the PR description or PR comments, so the
+reason for the exception remains visible in the repository history.
+
+When agents start opening PRs, this bypass policy must be revisited. Agents
+may not approve their own PRs, may not bypass branch protection, and any
+agent-authored change must require human approval before merge.
 
 ## Alternatives considered
 
