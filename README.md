@@ -44,6 +44,6 @@ behavior go through the same PR process as code changes.
 
 ## Author
 
-Irlan Lima — Senior Technical Product Manager with 17+ years in technology, focused on APIs, platform engineering, cloud architecture, and banking/fintech products.  
-Former API Gateway and API Management Product Manager at Itaú.
+[Irlan Lima — Senior Technical Product Manager with 17+ years in technology, focused on APIs, platform engineering, cloud architecture, and banking/fintech products.  
+Former API Management and API Gateway Product Manager at Itaú.]
 [LinkedIn](https://linkedin.com/in/irlanlima)
