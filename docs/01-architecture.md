@@ -14,34 +14,17 @@ Agents are governed at every stage. **No stage is skipped because the contributo
 
 The agent is invoked at **stage 6 (Evaluation)** of the lifecycle. It does NOT plan code changes, write code, or merge code. It assists human reviewers by producing a structured first-pass assessment.
 
-┌──────────────────────────────────────────┐
-            │   Human or agent contributor opens PR    │
-            └────────────────────┬─────────────────────┘
-                                 │
-                                 ▼
-            ┌──────────────────────────────────────────┐
-            │   Automated checks (CI, lint, tests)     │
-            └────────────────────┬─────────────────────┘
-                                 │
-                                 ▼
-            ┌──────────────────────────────────────────┐
-            │   PR Reviewer agent posts plan comment   │
-            └────────────────────┬─────────────────────┘
-                                 │
-                                 ▼
-            ┌──────────────────────────────────────────┐
-            │   PR Reviewer agent posts review summary │
-            └────────────────────┬─────────────────────┘
-                                 │
-                                 ▼
-            ┌──────────────────────────────────────────┐
-            │   Human reviewer (CODEOWNERS) decides    │
-            └────────────────────┬─────────────────────┘
-                                 │
-                                 ▼
-            ┌──────────────────────────────────────────┐
-            │   Merge (if approved + checks pass)      │
-            └──────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A[Human or agent contributor opens PR] --> B[Automated checks: CI, lint, tests]
+    B --> C[PR Reviewer agent posts plan comment]
+    C --> D[PR Reviewer agent posts review summary]
+    D --> E[Human reviewer CODEOWNERS decides]
+    E --> F{Approved + checks pass?}
+    F -->|Yes| G[Merge to develop]
+    F -->|No| H[Request changes]
+    H --> A
+```
 
 The human reviewer is the **gate**, not the agent. The agent is a **signal generator**, not a decision-maker.
 
