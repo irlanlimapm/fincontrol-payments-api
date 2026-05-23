@@ -115,12 +115,24 @@ When trading off "ship faster" vs "document more carefully", default to document
 
 ## External study materials
 
-This repo is paired with an external Obsidian vault (not in this repo) where:
-- Study notes for each of the 6 GH-600 domains live
-- 60 situational scenarios are written and answered
-- Daily recall and Anki flashcards are maintained
+## External study materials — Obsidian vault
 
-Claude Code should NOT attempt to access or modify the Obsidian vault. If a decision in this repo requires context from the vault, ask the user to paste the relevant section.
+This repo is paired with an Obsidian vault at `../GH-600/` (sibling directory) where:
+- Study notes for each of the 6 GH-600 domains live (`02 - Dominios/`)
+- 60 situational scenarios are written and answered (`04 - Scenarios/`)
+- Fixed artifacts: Decision Matrix, paired distinctions, glossary, framework (`01 - Artefatos fixos/`)
+- Daily recall in Portuguese (`03 - Daily recall/`)
+- NotebookLM exports (`07 - NotebookLM exports/`)
+
+### Vault access rules
+
+**Read access**: Claude Code may read any file in the vault when relevant context is needed — for example, when reviewing a repo artifact against its corresponding domain note, when proposing updates to the Decision Matrix, or when cross-referencing scenarios.
+
+**Write access**: Claude Code must NOT modify vault files autonomously. The user writes the vault. If a vault file change is genuinely needed, propose it explicitly, show the diff, and require approval. The user's daily recall, reflections, and Portuguese notes are not for automation.
+
+**Privacy boundary**: the `03 - Daily recall/` folder contains personal reflections in Portuguese. Read only when the user explicitly asks for cross-referencing with a specific recall entry. Don't summarize, analyze patterns, or comment on recall content unprompted.
+
+When the user asks for help with a scenario, Decision Matrix update, or cross-reference, Claude Code may read the relevant vault files directly instead of asking the user to paste content.
 
 ## Working with the user
 

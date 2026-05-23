@@ -1,4 +1,4 @@
-# Agent Specification — PR Reviewer
+# Agent Specification PR Reviewer
 
 > Specification for the primary agent in this repository: an automated reviewer of pull requests opened against the FinControl Payments API. This document defines what the agent does, what it must NOT do, how success is measured, and how it is held accountable.
 
@@ -34,18 +34,18 @@ The agent does **not** receive:
 
 For every PR it reviews, the agent produces exactly three artifacts:
 
-1. **A structured plan** — posted as the first comment on the PR before any analysis runs. Plan format:
+1. **A structured plan** posted as the first comment on the PR before any analysis runs. Plan format:
    - What the agent will inspect
    - Files it will analyze
    - Checks it will run
    - Estimated risk classification for the change
-2. **A review summary** — a single PR comment with sections:
+2. **A review summary** a single PR comment with sections:
    - Scope adherence (did the PR stay within its stated scope?)
    - Risk assessment (operational / security / compliance)
    - Test coverage observations
    - Specific concerns, if any
    - Recommendation: `approve` / `request-changes` / `defer-to-human`
-3. **Inline comments** — only on lines where the agent has high-confidence concerns. Maximum 5 inline comments per PR to avoid noise.
+3. **Inline comments** only on lines where the agent has high-confidence concerns. Maximum 5 inline comments per PR to avoid noise.
 
 ## Success criteria
 

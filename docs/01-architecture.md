@@ -1,4 +1,4 @@
-# Architecture — Agent Integration in the SDLC
+# Architecture Agent Integration in the SDLC
 
 > How the PR Reviewer agent fits into the development workflow of FinControl Payments API, and what governance layer surrounds it.
 
@@ -8,7 +8,7 @@
 
 Every change to this repository follows the same lifecycle, whether the contributor is human or agent:
 
-Agents are governed at every stage. **No stage is skipped because the contributor is an agent** — if anything, the discipline is stricter.
+Agents are governed at every stage. **No stage is skipped because the contributor is an agent** if anything, the discipline is stricter.
 
 ## Where the PR Reviewer agent operates
 
@@ -67,10 +67,10 @@ If the plan phase fails to produce a structured plan, the reasoning phase does n
 
 The agent operates with **autonomy proportional to reversibility and risk**:
 
-- Posting a comment on a PR — fully reversible, low risk → autonomous
-- Recommending a decision — humans act on the recommendation → autonomous
-- Merging a PR — irreversible, high risk → blocked
-- Modifying repository settings — irreversible, high risk → blocked
+- Posting a comment on a PR fully reversible, low risk → autonomous
+- Recommending a decision humans act on the recommendation → autonomous
+- Merging a PR irreversible, high risk → blocked
+- Modifying repository settings irreversible, high risk → blocked
 
 No approval gates exist where they would add friction without reducing material risk. Every gate that exists, exists for a reason that ties back to operational, security, or compliance risk.
 
