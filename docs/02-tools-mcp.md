@@ -1,60 +1,85 @@
-# Tools and MCP — PR Reviewer Agent
+# Tools and MCP PR Reviewer Agent
 
-> How the PR Reviewer agent accesses tools and external services, what MCP servers
-> it uses, and how permissions are scoped.
+> How the PR Reviewer agent accesses tools and external services, what MCP servers it may use, and how permissions are scoped.
 
 ---
 
-## Tools used by this agent
+## Purpose
 
-| Tool | Purpose | Permission required | MCP server or native? |
-|---|---|---|---|
-| | | | |
+This document defines the tool access model for the `PR Reviewer Agent` in the `fincontrol-payments-api` repository.
 
-## MCP servers
+The goal is not to give the agent maximum capability.
 
-### GitHub remote MCP server
-- **Transport**: 
-- **What it exposes** (resources, tools, prompts):
-- **Why this server** (vs alternatives):
+The goal is to give the agent enough capability to review pull requests safely, produce useful evaluation evidence, and remain auditable without being able to bypass human governance.
 
-### [Other MCP server if applicable]
-- **Transport**:
-- **What it exposes**:
-- **Why this server**:
+This document supports the GH-600 Domain 2 learning objective:
 
-## MCP allow list
+> Implement tool use and environment interaction.
 
-Servers permitted for this repository:
+It covers:
 
-| Server | Allowed | Reason |
-|---|---|---|
-| | | |
+- agent tools
+- GitHub APIs and workflows
+- MCP servers
+- MCP registry and allow-list strategy
+- execution context
+- repository, branch, and workflow boundaries
+- safe execution paths
+- retry, rollback, escalation, and traceability
 
-Servers explicitly blocked:
+---
 
-| Server | Blocked | Reason |
-|---|---|---|
-| | | |
+## Design principle
 
-## Tool permissions (least privilege)
+The PR Reviewer Agent follows this principle:
 
-| Tool | Read | Write | Why not more? |
-|---|---|---|---|
-| | | | |
+> Tools expand what an agent can do. Governance defines what it is allowed to do.
 
-## Execution context
+Tool access is therefore designed around:
 
-- **Repository scope**:
-- **Branch scope**:
-- **Secrets access**:
-- **Environment**:
+1. **Least privilege**
+2. **Repository-level scope**
+3. **Branch-based isolation**
+4. **Read-first behavior**
+5. **Human approval before merge**
+6. **Traceable execution**
+7. **Explicit escalation for uncertainty or risk**
 
-## What this agent cannot access
+The agent may inspect, analyze, comment, classify, and recommend.
 
-(List explicitly enforced by permissions, not by agent self-restraint)
+The agent may not approve, merge, deploy, modify secrets, change protected workflows, or bypass branch protection.
 
-## Open questions
+---
 
-(To be resolved as I learn more in Weeks 2-3)
--
+## Agent role
+
+| Field | Definition |
+|---|---|
+| Agent | `PR Reviewer Agent` |
+| Primary SDLC step | Pull request review |
+| Trigger | Pull request opened, updated, or manually requested |
+| Main responsibility | Review PRs for scope, risk, quality, security, and evidence |
+| Output type | Structured PR review, risk classification, evidence checklist, escalation recommendation |
+| Human gate | Required before merge |
+| Autonomy model | Autonomous analysis and commenting; no autonomous merge or deployment |
+
+---
+
+## Tooling mental model
+
+The agent interacts with the development environment through controlled tools.
+
+```text
+Task / PR
+↓
+Agent reasoning
+↓
+Tool selection
+↓
+Permission boundary
+↓
+Execution context
+↓
+Evidence output
+↓
+Human review
