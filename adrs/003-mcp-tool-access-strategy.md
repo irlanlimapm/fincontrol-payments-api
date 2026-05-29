@@ -11,7 +11,7 @@ However, tool access increases operational and security risk. The agent must not
 ## Decision
 The PR Reviewer Agent will start with a read-only GitHub MCP strategy.
 
-The agent will use the official GitHub MCP server as the primary MCP integration path. The exact remote MCP transport and configuration will be documented when the MCP configuration is implemented.
+The agent will use the official GitHub remote MCP server as the primary MCP integration path, using HTTP/SSE transport. The exact MCP configuration will be documented when implemented.
 
 Allowed capabilities:
 
@@ -40,8 +40,8 @@ Blocked capabilities:
 ## Alternatives considered
 
 - **Full read/write access through the GitHub MCP server**: rejected - it would give the agent access to high-risk actions that should remain under human control.
-- **No MCP servers, only Copilot-native tools**: rejected - too limiting for this governance lab, which intentionally demonstrates MCP-based tool access, tool boundaries, and permission strategy.
-- **Multiple MCP servers from day one**: deferred - this would increase attack surface before the agent has proven its baseline behavior with a single controlled integration path.
+- **No MCP servers, only Copilot-native tools**: rejected - too limiting for this governance lab, which intentionally demonstrates MCP-based tool access, tool boundaries, and permission strategy, and would prevent the agent from accessing PR diff and check status via structured API.
+- **Multiple MCP servers from day one, including GitHub and custom internal servers**: deferred - this would increase attack surface before the agent has proven its baseline behavior with a single controlled integration path.
 
 ## Rationale
 This approach follows least privilege, keeps the agent inside the GitHub SDLC control plane, and preserves human accountability for high-risk actions.
@@ -51,6 +51,6 @@ The agent should be able to gather context, classify risk, produce review eviden
 ## Consequences
 The agent can produce useful review evidence without exceeding the boundaries defined by branch protection, CODEOWNERS, and workflow checks.
 
-Enforcement is based on explicit MCP tool allowlisting, GitHub permissions, branch protection rules, CODEOWNERS, and organization or enterprise MCP policies where available - not on agent self-restraint.
+Enforcement is based on explicit MCP tool allowlisting, GitHub permissions, repository allow list, branch protection rules, CODEOWNERS, and organization or enterprise MCP policies where available - not on agent self-restraint.
 
 Additional MCP servers require a separate ADR before activation.
