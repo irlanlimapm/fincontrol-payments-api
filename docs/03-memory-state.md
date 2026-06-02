@@ -277,3 +277,5 @@ Safe continuity requires:
 * [Autonomy Matrix](../guardrails/autonomy-matrix.md)
 * [PR Reviewer Evaluation Rubric](../evaluation/pr-review-rubric.md)
 * [Domain 02 Tool Use Simulation](../simulations/domain-02-tool-use-simulation.md)
+
+This document is part of the GH-600 Domain 3 portfolio package.
